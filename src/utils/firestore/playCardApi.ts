@@ -66,6 +66,4 @@ export const playCard = async (
     turnIndex: nextTurnIndex,
     forcedColor: card.color === 'wild' ? forcedColor : null,
   });
-
-  console.log(`🃏 ${playerId} → 카드 냄:`, card);
 };

@@ -30,6 +30,4 @@ export const resetRoom = async (roomId: string) => {
     turnIndex: 0,
     forcedColor: null,
   });
-
-  console.log(`🔁 방 ${roomId} 초기화 완료`);
 };
