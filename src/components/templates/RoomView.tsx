@@ -16,6 +16,7 @@ import { leaveRoom } from '@/utils/firestore/leaveRoomApi';
 import { db } from '@/firebase/config';
 import Card from '@/components/atoms/Card';
 import ColorPicker from '@/components/organisms/ColorPicker';
+import useToast from '@/hooks/useToast';
 
 const CardBack = () => (
   <div className="w-20 h-28 rounded-xl bg-gray-400 border-2 border-gray-600 shadow-inner" />
@@ -35,7 +36,7 @@ const RoomView = ({ roomId }: { roomId: string }) => {
   const router = useRouter();
   const playerId = searchParams.get('player') ?? 'unknown';
   const room = useRoomSync(roomId);
-
+  const { showToast } = useToast();
   const [pendingWildIndex, setPendingWildIndex] = useState<number | null>(null);
   const [winner, setWinner] = useState<string | null>(null);
 
@@ -73,7 +74,12 @@ const RoomView = ({ roomId }: { roomId: string }) => {
     if (!isMyTurn) return;
 
     if (!isPlayable(selected)) {
-      alert('❌ 낼 수 없는 카드입니다!');
+      showToast({
+        title: ' 낼 수 없는 카드입니다!',
+        description: '다시 선택해주세요.',
+        type: 'danger',
+        lazy: true,
+      });
 
       return;
     }

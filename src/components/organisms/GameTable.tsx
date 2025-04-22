@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { useUnoStore } from '@/stores/useUnoStore';
 import CardHand from '@/components/molecules/CardHand';
 import ColorPicker from '@/components/organisms/ColorPicker';
-
+import useToast from '@/hooks/useToast';
 const GameTable = () => {
   const {
     playerHands,
@@ -31,6 +31,7 @@ const GameTable = () => {
 
   const currentHand = playerHands[currentPlayer] || [];
   const topCard = discardPile[0];
+  const { showToast } = useToast();
 
   if (!topCard) {
     return <div className="p-8 text-center">🌀 게임 준비 중...</div>;
@@ -47,7 +48,12 @@ const GameTable = () => {
     const card = currentHand[idx];
 
     if (!isPlayable(card)) {
-      alert('❌ 이 카드는 낼 수 없습니다!');
+      showToast({
+        title: '실패 입니다',
+        description: '이 카드를 버릴 수 없습니다.',
+        type: 'danger',
+        lazy: true,
+      });
 
       return;
     }
