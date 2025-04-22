@@ -15,8 +15,6 @@ export const drawCard = async (roomId: string, playerId: string) => {
   const hands: Record<string, Card[]> = data.hands ?? {};
 
   if (deck.length === 0) {
-    console.warn('❗ 덱이 비었습니다.');
-
     return;
   }
 
@@ -28,6 +26,4 @@ export const drawCard = async (roomId: string, playerId: string) => {
     deck,
     hands,
   });
-
-  console.log(`📥 ${playerId} → 카드 뽑기`, drawnCard);
 };

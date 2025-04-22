@@ -11,8 +11,6 @@ export const createRoom = async (roomId: string, playerIds: string[]) => {
 
   // ❗ 이미 존재하는 방이면 초기화하지 않음
   if (snap.exists()) {
-    console.log(`⚠️ Room ${roomId} 이미 존재`);
-
     return;
   }
 
@@ -37,6 +35,4 @@ export const createRoom = async (roomId: string, playerIds: string[]) => {
     winner: null,
     createdAt: Date.now(),
   });
-
-  console.log(`🎮 Room ${roomId} 생성 완료`);
 };
