@@ -22,12 +22,12 @@ const Card = ({ color, value, onClick }: CardProps) => {
   const style = COLOR_STYLE_MAP[color];
 
   return (
-    <div
+    <button
       className={`w-20 h-28 rounded-xl shadow-lg flex items-center justify-center text-sm text-center font-bold px-2 cursor-pointer transition-transform hover:scale-105 ${style.bg} ${style.text}`}
       onClick={onClick}
     >
       {translateCardValue(value)}
-    </div>
+    </button>
   );
 };
 
