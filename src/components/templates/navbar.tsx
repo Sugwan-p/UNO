@@ -6,12 +6,8 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  Avatar,
 } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 
 import { ThemeSwitch } from '@/components/atoms/ThemeSwitch';
 
@@ -29,66 +25,39 @@ export const AcmeLogo = () => {
 };
 
 export default function App() {
+  const router = useRouter();
+
   return (
     <NavbarComponent isBordered maxWidth="2xl">
       <NavbarContent justify="start">
-        <NavbarBrand className="">
-          <h1 className="hidden sm:block text-2xl font-bold text-inherit">
-            Gym<span className="text-main">M</span>ate
-          </h1>
+        <NavbarBrand className="cursor-pointer">
+          <button
+            className="hidden sm:block text-2xl font-bold text-mono-100 hover:text-main transition-colors"
+            onClick={() => router.push('/')}
+          >
+            UNO GAME
+          </button>
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="gap-10" justify="end">
         <NavbarContent className="hidden sm:flex gap-6" justify="end">
           <NavbarItem>
-            <Link color="foreground" href="#">
-              PT정보
+            <Link color="foreground" href="test">
+              게임 찾기
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="#">
-              헬스장정보
+            <Link color="foreground" href="rules">
+              규칙 설명
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="#">
-              나의운동
+            <Link color="foreground" href="/">
+              연습 하기
             </Link>
           </NavbarItem>
         </NavbarContent>
         <ThemeSwitch />
-        <Dropdown placement="bottom-end">
-          <DropdownTrigger>
-            <Avatar
-              isBordered
-              as="button"
-              className="transition-transform"
-              color="secondary"
-              name="Jason Hughes"
-              size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-            />
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem
-              key="profile"
-              isDisabled
-              isReadOnly
-              className="h-14 gap-2"
-            >
-              <p className="font-semibold">남은캐시 : 10000원</p>
-            </DropdownItem>
-            <DropdownItem key="settings">마이 페이지</DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
-            <DropdownItem key="analytics">Analytics</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem>
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-            <DropdownItem key="logout" color="danger">
-              Log Out
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
       </NavbarContent>
     </NavbarComponent>
   );

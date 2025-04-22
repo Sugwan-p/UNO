@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: 'GymMate',
-  description: '나만의 PT선생님을 찾고 운동을 즐겨보세요.',
+  name: 'UNO GAME',
+  description: 'UNO 게임을 즐겨보세요.',
   navItems: [
     {
       label: 'Home',
