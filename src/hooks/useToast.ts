@@ -18,7 +18,7 @@ const useToast = () => {
     addToast({
       title,
       description,
-      timeout: lazy ? 3000 : 0,
+      timeout: lazy ? 1000 : 0,
       shouldShowTimeoutProgress: lazy,
       color: type,
     });

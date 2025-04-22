@@ -13,6 +13,7 @@ import {
 import { enterRoom } from '@/utils/firestore/enterRoomApi';
 import { createRoom } from '@/utils/firestore/roomApi';
 import { db } from '@/firebase/config';
+import useToast from '@/hooks/useToast';
 
 interface RoomInfo {
   id: string;
@@ -26,6 +27,7 @@ const TestPage = () => {
   const [rooms, setRooms] = useState<RoomInfo[]>([]);
   const [newRoomId, setNewRoomId] = useState('');
   const [playerCount, setPlayerCount] = useState(2);
+  const { showToast } = useToast();
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, 'rooms'), async (snapshot) => {
@@ -59,7 +61,12 @@ const TestPage = () => {
     const room = snap.data() as RoomInfo;
 
     if (room.started) {
-      alert('이미 시작된 게임입니다!');
+      showToast({
+        title: '이미 시작된 게임입니다!',
+        description: '다른 방을 선택해주세요.',
+        type: 'danger',
+        lazy: true,
+      });
 
       return;
     }
@@ -69,13 +76,23 @@ const TestPage = () => {
     if (playerId) {
       router.push(`/room/${roomId}?player=${playerId}`);
     } else {
-      alert('⚠️ 이 방은 이미 가득 찼습니다.');
+      showToast({
+        title: '이미 시작된 게임입니다!',
+        description: '다른 방을 선택해주세요.',
+        type: 'danger',
+        lazy: true,
+      });
     }
   };
 
   const handleCreateRoom = async () => {
     if (!newRoomId || playerCount < 2 || playerCount > 4) {
-      alert('방 이름을 입력하고 인원 수는 2~4명이어야 합니다.');
+      showToast({
+        title: '제목을 입력해주세요',
+        description: '2~4명이어야 합니다.',
+        type: 'danger',
+        lazy: true,
+      });
 
       return;
     }
@@ -99,7 +116,12 @@ const TestPage = () => {
       setPlayerCount(2);
       router.push(`/room/${newRoomId}?player=player1`);
     } else {
-      alert('⚠️ 이미 존재하는 방 이름입니다.');
+      showToast({
+        title: '이미 존재하는 방 이름입니다.',
+        description: '다른 방 이름을 입력해주세요.',
+        type: 'danger',
+        lazy: true,
+      });
     }
   };
 
